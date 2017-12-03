@@ -6,8 +6,6 @@
 
 		 request = require('request');
 //     poster =  require("poster"),
-//		 googleapis = require('googleapis'),
-//		 googleAuth = require('google-auth-library');
 		 
 var cors = require('cors');
 var events = require('events');
