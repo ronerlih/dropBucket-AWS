@@ -48,7 +48,7 @@ app.get('/dashboard', function (req, res) {
 			listPermissions(para);
 
 			eventEmitter.once('gotPolicy',function(){
-			res.render('index', {owner: ownerName,buckets: app.locals.buckets});
+			res.render('index', {owner: ownerName,buckets: app.locals.buckets, req: req});
 			logRequest(req.protocol + '://' + req.get('host'),req.originalUrl,req.ip);
 			//to fix reset
 		});
@@ -58,9 +58,17 @@ app.get('/dashboard', function (req, res) {
 
 });
 
-app.get('/search', function (req, res) {
-	//resopond to no query
-		 res.send("YO! search query is empty, please add ?q=quary at the end of the url");
+
+app.get('/create-bucket', function (req, res) {
+	//creat bucket
+	var createParams = {
+			Bucket: "test-wqeasda" ,
+			CreateBucketConfiguration: {
+					LocationConstraint: "us-west-1"
+					}
+ 			};
+	CreateBucket(createParams);
+	 
 	logRequest(req.protocol + '://' + req.get('host'),req.originalUrl,req.ip);
 });
 
@@ -127,6 +135,18 @@ function listPermissions(parameters){
 		}
 		}               // successful response
 	});
+}
+
+function CreateBucket(paramsCreate){
+		s3.createBucket(paramsCreate, function(err, data) {
+   if (err) console.log(err, err.stack); // an error occurred
+   else     console.log(data);           // successful response
+   /*
+   data = {
+    Location: "http://examplebucket.s3.amazonaws.com/"
+   }
+   */
+ });
 }
 		
 

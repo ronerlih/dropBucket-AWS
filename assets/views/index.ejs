@@ -2,37 +2,48 @@
    <head>
 	 <title>dropBucktes</title>
       <style>
-			table{overflow-x:auto;  white-space: nowrap;margin-left:10px;}
+			table{border-spacing:0;overflow-x:auto;  white-space: nowrap;width:100%;border:0;}
+			button {}
 /*			td{padding:5px;color:black;}*/
 			</style>
    </head>
    <body style="width:100%;padding=0px;margin:0px; font-family:arial;">
+<!--
       <header style="background-color:cornflowerblue; color:white; padding:5px;width:100%">
          <h4>QUANTUM DropBucket for AWS</h4>
          <h6> Owner: <%=owner%></h6>
       </header>
+-->
       <table >
 			<col aligh="justify">
 			<col aligh="justify">
 			<col aligh="justify">
+			<tr><td Colspan="8" style="margin-top:20px;;background-color:cornflowerblue;color:white; padding:5px;">
+							<h4>QUANTUM DropBucket for AWS</h4>
+         			<h6> Owner: <%=owner%></h6>
+							<button onclick="location.href='/create-bucket'">create bucket</button>
+					</td></tr>
+				<tr>
+				<tr>
+				<td>&nbsp;</td>
+				</tr>
 				<tr>
 				<td><b>bucket name</b></td><td><b>created</b></td><td><b>Owner</b></td><td><b>Grants</b></td>
 				</tr>
 				<tr>
-				
 				<% itemCount = 0; buckets.Buckets.forEach(function (bucket){ %>
 				<% if(itemCount % 2 == 0){ %>
 				<tr style="background-color:lightgray"><td>
 		<%	}else{ %>
 				<tr><td>
 		<%	} %>
-			<a href="" onclick="location.href=/<%=bucket.Name%>"><%=bucket.Name%></a>  </td><td> date created: <%=bucket.CreationDate%>
+			<a href="" onclick="location.href=/<%=bucket.Name%>"><%=bucket.Name%></a>  </td><td><%=bucket.CreationDate%>
 			</td>
 			
 			<% if (policy[itemCount] != null){%>
-<!--					<%// if (policy[itemCount].Owner)%>-->
 			
 			<td><%= policy[itemCount].Owner.DisplayName %></td> 
+
 			<% policy[itemCount].Grants.forEach(function(grantee){%>
 					<% if (grantee.Permission == 'READ' || grantee.Permission == 'WRITE'){%>
 						<td><%=grantee.Grantee.DisplayName %> </td>
