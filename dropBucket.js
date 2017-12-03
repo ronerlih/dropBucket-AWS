@@ -66,7 +66,9 @@ app.get('/create-bucket', function (req, res) {
 					}
  			};
 	CreateBucket(createParams);
-	 
+				res.redirect('/dashboard');
+
+//	res.render('index', {owner: ownerName,buckets: app.locals.buckets, req: req});
 	logRequest(req.protocol + '://' + req.get('host'),req.originalUrl,req.ip);
 });
 
