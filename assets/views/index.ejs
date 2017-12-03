@@ -1,0 +1,59 @@
+<html>
+   <head>
+	 <title>dropBucktes</title>
+      <style>
+			table{overflow-x:auto;  white-space: nowrap;margin-left:10px;}
+/*			td{padding:5px;color:black;}*/
+			</style>
+   </head>
+   <body style="width:100%;padding=0px;margin:0px; font-family:arial;">
+      <header style="background-color:cornflowerblue; color:white; padding:5px;width:100%">
+         <h4>QUANTUM DropBucket for AWS</h4>
+         <h6> Owner: <%=owner%></h6>
+      </header>
+      <table >
+			<col aligh="justify">
+			<col aligh="justify">
+			<col aligh="justify">
+				<tr>
+				<td><b>bucket name</b></td><td><b>created</b></td><td><b>Owner</b></td><td><b>Grants</b></td>
+				</tr>
+				<tr>
+				
+				<% itemCount = 0; buckets.Buckets.forEach(function (bucket){ %>
+				<% if(itemCount % 2 == 0){ %>
+				<tr style="background-color:lightgray"><td>
+		<%	}else{ %>
+				<tr><td>
+		<%	} %>
+			<a href="" onclick="location.href=/<%=bucket.Name%>"><%=bucket.Name%></a>  </td><td> date created: <%=bucket.CreationDate%>
+			</td>
+			
+			<% if (policy[itemCount] != null){%>
+<!--					<%// if (policy[itemCount].Owner)%>-->
+			
+			<td><%= policy[itemCount].Owner.DisplayName %></td> 
+			<% policy[itemCount].Grants.forEach(function(grantee){%>
+					<% if (grantee.Permission == 'READ' || grantee.Permission == 'WRITE'){%>
+						<td><%=grantee.Grantee.DisplayName %> </td>
+						<td><%=grantee.Permission %> </td>
+					<%}%>
+			<%});%>
+			
+<!--			<% //console.log("keys: " + Object.keys(policy[itemCount].Policy)) %>-->
+			<%}else{%>
+			<td>&nbsp;-- no policy -- </td>
+			<%}%>
+			</tr>
+			<% itemCount++  }) %>
+					
+					
+					</td>
+				</tr>
+			</table>
+			<hr style="margin-left:10px;margin-top:50px;background-color:cornflowerblue;width:40%;">
+			<div style="font-size:0.7em;margin:10px;color:cornflowerblue">
+			devNow
+			</div>
+	 </body>
+</html>

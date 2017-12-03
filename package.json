@@ -11,6 +11,7 @@
   "dependencies": {
     "aws-sdk": "^2.162.0",
     "cors": "^2.8.4",
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
     "fs": "0.0.1-security",
     "request": "^2.83.0"
